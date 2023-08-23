@@ -5,7 +5,8 @@
     use App\Session;
     use App\AbstractController;
     use App\ControllerInterface;
-    use Model\Managers\SujetManager;
+use Model\Entities\Categorie;
+use Model\Managers\SujetManager;
     use Model\Managers\MessageManager;
     use Model\Managers\CategorieManager;
     
@@ -37,6 +38,21 @@
                 ]
                 ];
             }
+
+        public function listeCategorieSujets($categorie_id){
+            $categorieManager = new CategorieManager();
+            $categorie = $categorieManager->findId($categorie_id);
+            $sujetManager = new SujetManager();
+            $sujets = $sujetManager->lesSujetDuneCategorie($categorie_id);
+
+            return [
+                "view" => VIEW_DIR . "forum/listeCategorieSujets.php",
+                "data" => [
+                    "categorie" => $categorie,
+                    "sujets" => $sujets
+                ]
+            ];
+        }
 
         
 
