@@ -17,7 +17,7 @@
            $sujetManager = new SujetManager();
 
             return [
-                "view" => VIEW_DIR."forum/Sujet.php",
+                "view" => VIEW_DIR."forum/sujet.php",
                 "data" => [
                     "sujets" => $sujetManager->findAll(["date_creation", "DESC"])
                 ]
@@ -36,7 +36,7 @@
                     "categories" => $categories
                 ]
                 ];
-        }
+            }
 
         
 
