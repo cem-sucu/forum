@@ -24,6 +24,16 @@
         
         }
 
+        public function listCategories(){
+            $categorieManager = new CategorieManager();
+            return [
+                "view" => VIEW_DIR . "forum/Categorie.php",
+                "data" => [
+                    "categories" => $categorieManager->findAll(["categorie", "ASC"])
+                ]
+                ];
+        }
+
         
 
     }
