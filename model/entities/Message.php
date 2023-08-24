@@ -8,15 +8,14 @@ final class Message extends Entity{
     
     private $id;
     private $texte;
-    private $date_creation;
-    private $sujet_id;
-    private $utilisateur_id;
+    private $dateCreation;
+    private $sujet;
+    private $utilisateur;
 
     public function __construct($data)
     {
         $this->hydrate($data);
     }
-
     
 
     /**
@@ -60,61 +59,61 @@ final class Message extends Entity{
     }
 
     /**
-     * Get the value of date_creation
+     * Get the value of dateCreation
      */ 
-    public function getDate_creation()
+    public function getDateCreation()
     {
-        return $this->date_creation;
+        return $this->dateCreation->format("Y-m-d");
     }
 
     /**
-     * Set the value of date_creation
+     * Set the value of dateCreation
      *
      * @return  self
      */ 
-    public function setDate_creation($date_creation)
+    public function setDateCreation($dateCreation)
     {
-        $this->date_creation = $date_creation;
+        $this->dateCreation = new \DateTime($dateCreation);
 
         return $this;
     }
 
     /**
-     * Get the value of sujet_id
+     * Get the value of sujet
      */ 
-    public function getSujet_id()
+    public function getSujet()
     {
-        return $this->sujet_id;
+        return $this->sujet;
     }
 
     /**
-     * Set the value of sujet_id
+     * Set the value of sujet
      *
      * @return  self
      */ 
-    public function setSujet_id($sujet_id)
+    public function setSujet($sujet)
     {
-        $this->sujet_id = $sujet_id;
+        $this->sujet = $sujet;
 
         return $this;
     }
 
     /**
-     * Get the value of utilisateur_id
+     * Get the value of utilisateur
      */ 
-    public function getUtilisateur_id()
+    public function getUtilisateur()
     {
-        return $this->utilisateur_id;
+        return $this->utilisateur;
     }
 
     /**
-     * Set the value of utilisateur_id
+     * Set the value of utilisateur
      *
      * @return  self
      */ 
-    public function setUtilisateur_id($utilisateur_id)
+    public function setUtilisateur($utilisateur)
     {
-        $this->utilisateur_id = $utilisateur_id;
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }

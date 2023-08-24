@@ -8,10 +8,10 @@ final class Sujet extends Entity{
 
     private $id;
     private $titre;
-    private $date_creation;
+    private $dateCreation;
     private $verouiller;
-    private $categorie_id;
-    private $utilisateur_id;
+    private $categorie;
+    private $utilisateur;
 
     public function __construct($data)
     {
@@ -61,21 +61,21 @@ final class Sujet extends Entity{
     }
 
     /**
-     * Get the value of date_creation
+     * Get the value of dateCreation
      */ 
-    public function getDate_creation()
+    public function getDateCreation()
     {
-        return $this->date_creation;
+        return $this->dateCreation->format("Y-m-d");
     }
 
     /**
-     * Set the value of date_creation
+     * Set the value of dateCreation
      *
      * @return  self
      */ 
-    public function setDate_creation($date_creation)
+    public function setDateCreation($dateCreation)
     {
-        $this->date_creation = $date_creation;
+        $this->dateCreation = new \DateTime($dateCreation);
 
         return $this;
     }
@@ -101,41 +101,41 @@ final class Sujet extends Entity{
     }
 
     /**
-     * Get the value of categorie_id
+     * Get the value of categorie
      */ 
-    public function getCategorie_id()
+    public function getCategorie()
     {
-        return $this->categorie_id;
+        return $this->categorie;
     }
 
     /**
-     * Set the value of categorie_id
+     * Set the value of categorie
      *
      * @return  self
      */ 
-    public function setCategorie_id($categorie_id)
+    public function setCategorie($categorie)
     {
-        $this->categorie_id = $categorie_id;
+        $this->categorie = $categorie;
 
         return $this;
     }
 
     /**
-     * Get the value of utilisateur_id
+     * Get the value of utilisateur
      */ 
-    public function getUtilisateur_id()
+    public function getUtilisateur()
     {
-        return $this->utilisateur_id;
+        return $this->utilisateur;
     }
 
     /**
-     * Set the value of utilisateur_id
+     * Set the value of utilisateur
      *
      * @return  self
      */ 
-    public function setUtilisateur_id($utilisateur_id)
+    public function setUtilisateur($utilisateur)
     {
-        $this->utilisateur_id = $utilisateur_id;
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }

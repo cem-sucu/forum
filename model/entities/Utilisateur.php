@@ -9,7 +9,7 @@ final class Utilisateur extends Entity{
     private $id;
     private $pseudonyme;
     private $MotsDePasse;
-    private $date_inscription;
+    private $dateInscription;
     private $email;
     private $role;
 
@@ -17,8 +17,7 @@ final class Utilisateur extends Entity{
     {
         $this->hydrate($data);
     }
-
-
+    
 
     /**
      * Get the value of id
@@ -81,21 +80,21 @@ final class Utilisateur extends Entity{
     }
 
     /**
-     * Get the value of date_inscription
+     * Get the value of dateInscription
      */ 
-    public function getDate_inscription()
+    public function getDateInscription()
     {
-        return $this->date_inscription;
+        return $this->dateInscription->format("Y-m-d");
     }
 
     /**
-     * Set the value of date_inscription
+     * Set the value of dateInscription
      *
      * @return  self
      */ 
-    public function setDate_inscription($date_inscription)
+    public function setDateInscription($dateInscription)
     {
-        $this->date_inscription = $date_inscription;
+        $this->dateInscription = new \DateTime($dateInscription);
 
         return $this;
     }

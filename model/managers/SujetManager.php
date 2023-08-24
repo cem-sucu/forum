@@ -15,16 +15,14 @@
             parent::connect();
         }
 
-        public function lesSujetDuneCategorie($categorie_id) {
-            $sql = "SELECT s.*, c.categorie 
-                    FROM sujet s 
-                    INNER JOIN categorie c ON s.id_categorie = c.id_categorie
-                    WHERE s.id_categorie = :categorie_id
-                    ORDER BY s.date_creation DESC";
-            $params = [":categorie_id" => $categorie_id];
+        public function lesSujetDuneCategorie($id) {
+            $sql = "SELECT s.titre, s.dateCreation, s.utilisateur_id, s.id_sujet
+                    FROM sujet s
+                    WHERE s.categorie_id = :id
+                    ORDER BY s.dateCreation ASC;";
         
             return $this->getMultipleResults(
-                DAO::select($sql,  ["id"=>$categorie_id]), 
+                DAO::select($sql,  ["id"=>$id]), 
                 $this->className);
         }
     }
