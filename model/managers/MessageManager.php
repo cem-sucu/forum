@@ -4,6 +4,8 @@
     use App\Manager;
     use App\DAO;
     use Model\Managers\MessageManager;
+    use Model\Managers\SujetManager;
+    use Model\Managers\CategorieManager;
 
     class MessageManager extends Manager{
 
@@ -20,9 +22,13 @@
                     FROM message m
                     WHERE m.sujet_id = :id
                     ORDER BY m.dateCreation ASC;";
+
+        return $this->getMultipleResults(
+            DAO::select($sql, ["id"=>$id]),
+            $this->className);
         }
 
 
-    }
+    };
 
 ?>

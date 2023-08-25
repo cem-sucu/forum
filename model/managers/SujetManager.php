@@ -25,6 +25,6 @@
                 DAO::select($sql,  ["id"=>$id]), 
                 $this->className);
         }
-    }
+    };
 
 ?>

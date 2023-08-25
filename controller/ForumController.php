@@ -53,6 +53,21 @@
                 ]
             ];
         }
+
+        public function listMessagesSujet($id){
+            $sujetManager = new SujetManager();
+            $sujet = $sujetManager->findOneById($id);
+            $messageManager = new MessageManager();
+            $messages = $messageManager->messagesParSujets($id);
+
+                return [
+                    "view" => VIEW_DIR."forum/listMessagesSujet.php",
+                    "data" => [
+                        "sujet" => $sujet,
+                        "messages" =>$messages,
+                    ]
+                    ];
+        }
         
 
     }

@@ -9,6 +9,9 @@ $sujets = $result["data"]["sujets"];
 <?php
 foreach($sujets as $sujet){
     ?>
+    <a href="?ctrl=forum&action=listMessagesSujet&id=<?=$sujet->getId()?>"><?= 
+            $sujet->getTitre() ." créé le : ".$sujet->getDateCreation() ?>"
+        </a>  
     <!-- <p><?=$sujet->getId()?></p> -->
     <p><?=$sujet->getTitre()?></p>
     <?php
