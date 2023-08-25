@@ -6,7 +6,8 @@ $messages = $result['data']["messages"];
 <h1><?=$sujet->getTitre() ?></h1>
 
 <?php
-if ($messages !== null) {
+// ici je vérifie le tableau si c'est différent de NUULL je retourne le message trouvé, sinon si c'est NULL alors je renvoie le mssage non trouvé
+if ($messages !== null) { 
     foreach($messages as $message){
         ?>
         <h3><?=$message->getUtilisateur()->getPseudonyme() ?></h3>
