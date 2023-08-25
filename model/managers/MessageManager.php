@@ -15,6 +15,13 @@
             parent::connect();
         }
 
+        public function messagesParSujets($id){
+            $sql = "SELECT m.texte, m.dateCreation, m.utilisateur_id
+                    FROM message m
+                    WHERE m.sujet_id = :id
+                    ORDER BY m.dateCreation ASC;";
+        }
+
 
     }
 
