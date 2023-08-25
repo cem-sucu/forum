@@ -17,13 +17,14 @@
             parent::connect();
         }
 
+        // la requete SQL pour trouver, récupérer les message par sujet par le :id
         public function messagesParSujets($id){
             $sql = "SELECT m.texte, m.dateCreation, m.utilisateur_id
                     FROM message m
                     WHERE m.sujet_id = :id
                     ORDER BY m.dateCreation ASC;";
 
-        return $this->getMultipleResults(
+        return $this->getMultipleResults( // pour renvoyer plusieur resultat
             DAO::select($sql, ["id"=>$id]),
             $this->className);
         }
