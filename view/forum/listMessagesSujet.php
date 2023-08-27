@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="./public/css/listMessageSujet.css">
 <?php
 $sujet = $result["data"]["sujet"];
 $messages = $result['data']["messages"];
@@ -10,9 +11,11 @@ $messages = $result['data']["messages"];
 if ($messages !== null) { 
     foreach($messages as $message){
         ?>
-        <h3><?=$message->getUtilisateur()->getPseudonyme() ?></h3>
-        <p>message créé :<?=$message->getDateCreation() ?></p>
-        <p><?=$message->getTexte() ?></p>
+        <div class="messageContenu">
+            <h3><?=$message->getUtilisateur()->getPseudonyme() ?></h3>
+            <p>message créé :<?=$message->getDateCreation() ?></p>
+            <p><?=$message->getTexte() ?></p>
+        </div>
         <?php
     }
 } else {
