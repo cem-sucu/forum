@@ -11,7 +11,7 @@ foreach($categories as $categorie ){ // ici je parcour chaque element dans le ta
 
     ?>
     <!-- <p><?=$categorie->getId()?></p> pour le id-->
-    <p><?=$categorie->getCategorie()?></p>
+    <p><li><?=$categorie->getCategorie()?></li></p>
     <a href="?ctrl=forum&action=listeCategorieSujets&id=<?=$categorie->getId()?>">Voir les sujets</a>
 
     <?php
