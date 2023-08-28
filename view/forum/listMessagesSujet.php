@@ -23,3 +23,10 @@ if ($messages !== null) {
 }
 
 ?>
+
+<h1>Ajouter un nouveau message</h1>
+<form action="index.php?ctrlforum&action=" method="post">
+    <label>Message</label><br>
+    <textarea name="message" id="message" required></textarea><br>
+    <input type="submit" name="submit" value="Ajouter">
+</form>

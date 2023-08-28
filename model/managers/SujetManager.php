@@ -31,11 +31,26 @@
         // la requete SQL pour ajouter des sujet
         public function ajouterSujet(){
             $sql = "INSERT INTO sujet (titre, categorie_id, utilisateur_id) 
-                    VALUES ('un sujet crée', '1','1');";
+                    VALUES ('un sujet crée', '1','1')";
 
             return $this->insert(
                 DAO::select($sql),
                 $this->className
+            );
+        }
+
+
+        // la requete pour ajouter des message
+        // INSERT INTO message (texte, sujet_id, utilisateur_id) 
+        // VALUES ('cest quoi un tacos ??', '13','1');
+
+        public function ajouterMessage(){
+            $sql = "INSERT INTO message (texte, sujet_id, utilisateur_id) 
+                    VALUES ('cest quoi un tacos ??', '13','1')";
+            
+            return $this->insert(
+                DAO::select($sql),
+                $this->classNAme
             );
         }
     };
