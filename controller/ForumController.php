@@ -72,6 +72,21 @@
                     ]
                     ];
         }
+
+        // la function ajouter/add 
+        public function ajouterSujet($id) {
+            $sujetManager = new $sujetManager();
+            $messageManager = new $sujetManager();
+
+            if(isset($_POST["suvbmit"]){
+                if(isset($_POST["titre"]) &&(!empty($_POST["titre"]))){
+                    $titre=filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                    $message=filter_input(INPUT_POST, "message", FILTER_SANITIZE_FULL_SPECIAL);
+                    
+                }
+            }
+            
+        }
         
 
     }
