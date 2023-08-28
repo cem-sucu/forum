@@ -46,7 +46,7 @@
             $categorie = $categorieManager->findOneById($id);
             $sujetManager = new SujetManager();
             $sujets = $sujetManager->lesSujetDuneCategorie($id);
-
+            $messageManager = new MessageManager();
 
             //pour le formulaire d'un ajout de sujet et d'un message 
             if(isset($_POST["submit"])) {
@@ -55,23 +55,27 @@
                     $titre=filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                     $message=filter_input(INPUT_POST, "message", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                     $utilisateur_id = 1;
+
+                $now = new \DateTime();
+                $nowFormat = $now->format("Y-m-d H:i:s");
+                
                 if($titre && $message &&$utilisateur_id){
                     $addSujet = $sujetManager->add([
                         "titre"=>$titre,
-                        "dateCreation"=>$date("D-m-y, H:i"),
+                        "dateCreation"=>$nowFormat,
                         "utilisateur_id"=>$utilisateur_id,
                         "verouiller"=>"0",
-                        "categorie"=>$id, 
+                        "categorie_id"=>$id, 
                     ]);
                     $messageManager->add([
                         "texte"=>$message,
-                        "dateCreation"=>$date("D-m-y, H:i"),
+                        "dateCreation"=>$nowFormat,
                         "sujet_id"=>$addSujet,
                         "utilisateur_id"=>$utilisateur_id,
                    
                     ]);
                     }
-                    header("Location:index.php?ctrl=forum&action=listMessagesSujet.php");
+                    header("Location:index.php?ctrl=forum&action=listeCategorieSujets&id=$id");
                     exit;
                 }
             }
