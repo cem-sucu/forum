@@ -18,3 +18,13 @@ $sujets = $result["data"]['sujets'];
     
 
 <?php } ?>
+
+<h1>Ajouter nouveau sujet</h1>
+<!-- le formulaire pour ajouter un nvo sujet, ne pas oublier de ajouter le id ensuite -->
+<form action="index.php?ctrl=forum&action=ajouterSujet&id=<?=$categorie->getId() ?>" method="post">
+    <label>Sujet:</label></br>
+       <input type="text" name="titre" id="titre" required></br> <!-- avec required on oblige l'utilisateur a saisir une donné  -->
+    <label>le message:</label></br>
+        <textarea name="message" id="message" required></textarea></br> <!-- avec required on oblige l'utilisateur a saisir une donné  -->
+        <input type="submit" name="submit" value="Ajouter">
+</form>

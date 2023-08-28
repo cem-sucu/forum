@@ -65,7 +65,7 @@ final class Sujet extends Entity{
      */ 
     public function getDateCreation()
     {
-        return $this->dateCreation->format("Y-m-d, H:i");
+        return $this->dateCreation->format("D-m-y, H:i");
     }
 
     /**

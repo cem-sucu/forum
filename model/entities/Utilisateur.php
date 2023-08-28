@@ -84,7 +84,7 @@ final class Utilisateur extends Entity{
      */ 
     public function getDateInscription()
     {
-        return $this->dateInscription->format("Y-m-d, H:i");
+        return $this->dateInscription->format("D-m-y, H:i");
     }
 
     /**

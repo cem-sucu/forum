@@ -18,7 +18,7 @@
            $sujetManager = new SujetManager();
 
             return [
-                "view" => VIEW_DIR."forum/sujet.php",
+                "view" => VIEW_DIR."forum/categorie.php",
                 "data" => [
                     "sujets" => $sujetManager->findAll(["dateCreation", "DESC"])
                 ]
@@ -47,6 +47,35 @@
             $sujetManager = new SujetManager();
             $sujets = $sujetManager->lesSujetDuneCategorie($id);
 
+
+            //pour le formulaire d'un ajout de sujet et d'un message 
+            if(isset($_POST["submit"])) {
+                // ajout de mon nouveau sujet
+                if(isset($_POST['titre']) && (!empty($_POST['titre']))){
+                    $titre=filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                    $message=filter_input(INPUT_POST, "message", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                    $utilisateur_id = 1;
+                if($titre && $message &&$utilisateur_id){
+                    $addSujet = $sujetManager->add([
+                        "titre"=>$titre,
+                        "dateCreation"=>$date("D-m-y, H:i"),
+                        "utilisateur_id"=>$utilisateur_id,
+                        "verouiller"=>"0",
+                        "categorie"=>$id, 
+                    ]);
+                    $messageManager->add([
+                        "texte"=>$message,
+                        "dateCreation"=>$date("D-m-y, H:i"),
+                        "sujet_id"=>$addSujet,
+                        "utilisateur_id"=>$utilisateur_id,
+                   
+                    ]);
+                    }
+                    header("Location:index.php?ctrl=forum&action=listMessagesSujet.php");
+                    exit;
+                }
+            }
+
             return [
                 "view" => VIEW_DIR . "forum/listeCategorieSujets.php",//le cheimin
                 "data" => [ //le tableau associatif contenant les données
@@ -64,6 +93,10 @@
             $messageManager = new MessageManager();
             $messages = $messageManager->messagesParSujets($id);
 
+            if(isset($_POST["submit"])) {
+                // ajout de mon nouveau message
+            }
+
                 return [
                     "view" => VIEW_DIR."forum/listMessagesSujet.php",
                     "data" => [
@@ -71,22 +104,6 @@
                         "messages" =>$messages,
                     ]
                     ];
-        }
-
-        // la function ajouter/add 
-        public function ajouterSujet($id) {
-            $sujetManager = new $sujetManager();
-            $messageManager = new $sujetManager();
-
-            if(isset($_POST["suvbmit"]){
-                if(isset($_POST["titre"]) &&(!empty($_POST["titre"]))){
-                    $titre=filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-                    $message=filter_input(INPUT_POST, "message", FILTER_SANITIZE_FULL_SPECIAL);
-                    
-                }
-            }
-            
-        }
-        
+        }        
 
     }
