@@ -3,6 +3,8 @@
     
     use App\Manager;
     use App\DAO;
+    use Model\Managers\MessageManager;
+    use Model\Managers\CategorieManager;
     use Model\Managers\SujetManager;
 
     class SujetManager extends Manager{
@@ -40,19 +42,6 @@
         }
 
 
-        // la requete pour ajouter des message
-        // INSERT INTO message (texte, sujet_id, utilisateur_id) 
-        // VALUES ('cest quoi un tacos ??', '13','1');
-
-        public function ajouterMessage(){
-            $sql = "INSERT INTO message (texte, sujet_id, utilisateur_id) 
-                    VALUES ('cest quoi un tacos ??', '13','1')";
-            
-            return $this->insert(
-                DAO::select($sql),
-                $this->classNAme
-            );
-        }
     };
 
 ?>

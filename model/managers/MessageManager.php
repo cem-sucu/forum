@@ -29,6 +29,20 @@
             $this->className);
         }
 
+        // la requete pour ajouter des message
+        // INSERT INTO message (texte, sujet_id, utilisateur_id) 
+        // VALUES ('cest quoi un tacos ??', '13','1');
+
+        public function ajouterMessage(){
+            $sql = "INSERT INTO message (texte, sujet_id, utilisateur_id) 
+                    VALUES ('cest quoi un tacos ??', '13','1')";
+            
+            return $this->insert(
+                DAO::select($sql),
+                $this->classNAme
+            );
+        }
+
 
     };
 
