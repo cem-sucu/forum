@@ -28,6 +28,8 @@ class SecurityController extends AbstractController implements ControllerInterfa
             $motsDePasse = filter_input(INPUT_POST, "motsDePasse", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $motsDePasseConfirmation =filter_input(INPUT_POST, "motsDePasseConfirmation", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $role ="ROLE_MEMBER";
+            // var_dump("$pseudonyme");die;
+
             // $now = new \DateTime();
             // $nowFormat = $now->format("Y-m-d H:i:s");
 

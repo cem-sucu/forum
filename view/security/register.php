@@ -2,7 +2,7 @@
 <h1>S'inscrire</h1>
 
 <!-- comme le live code de mickael hash.mp4 mais adapter a ma bdd et mes valeurs -->
-<form action="index.php?ctrl=forum&action=" method="POST">
+<form action="index.php?ctrl=security&action=inscription" method="POST">
     <label for="pseudonyme">Pseudo</label>
     <input type="text" name="pseudonyme" id="pseudonyme" required>
 
@@ -15,6 +15,6 @@
     <label>confirmation de votre mot de passe</label>
     <input type="password" name="motsDePasseConfirmation" id="motsDePasseConfirmation" required><br>
 
-    <input type="submit" value="Ajouter">
+    <input type="submit" name="submit" value="Ajouter">
 
 </form>
