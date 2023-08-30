@@ -68,7 +68,7 @@
                         "categorie_id"=>$id, 
                     ]);
                     $messageManager->add([
-                        "texte"=>$mesage,
+                        "texte"=>$message,
                         "dateCreation"=>$nowFormat,
                         "sujet_id"=>$addSujet,
                         "utilisateur_id"=>$utilisateur_id,
