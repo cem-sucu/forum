@@ -19,7 +19,7 @@
         public function findOneByEmail($email)
         {
             $sql = "SELECT *
-            FROM utilisateur u
+            FROM ".$this->tableName." u
             WHERE email = :email";
 
             return $this->getOneorNullResult(
@@ -32,7 +32,7 @@
         public function findOneByUser($pseudonyme)
         {
             $sql = "SELECT *
-            FROM  utilisateur u
+            FROM  ".$this->tableName." u
             WHERE pseudonyme = :pseudonyme";
 
             return $this->getOneorNullResult(
@@ -43,7 +43,7 @@
 
         public function connexion(){
             //je vcrée une instance de UtilisateurManager pour gérer les opérations liées aux utilisateur
-            $UtilisateurManager = new UtilisateurManager();
+            $utilisateurManager = new UtilisateurManager();
 
             //je vérifie si le formulaire a été soumis
             if(isset($_POST["submit"])){
@@ -53,7 +53,7 @@
 
                 if($email && $motsDePasse){ // si c'est valide je continue
                     // je chherche un utilisateur dans la base de données par son adresse e-mail avec la methode findOneByEmail.
-                    $dbUser= $UtilisateurManager->findOneByEmail($email);
+                    $dbUser= $utilisateurManager->findOneByEmail($email);
                     if($dbUser && password_verify($motsDePasse, $dbUser->getMotsDePasse())){
                         // Défini lutilisateur en session et en indiquant qu'il est connecté.
                         Session::setUser($dbUser);
