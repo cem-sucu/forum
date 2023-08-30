@@ -31,12 +31,19 @@ class SecurityController extends AbstractController implements ControllerInterfa
             // $now = new \DateTime();
             // $nowFormat = $now->format("Y-m-d H:i:s");
 
+            // je vérifie si les champs requis (pseudonyme, email, mots de passe) ont été remplis
             if($pseudonyme && $email && $motsDePasse) {
                 $UtilisateurManager = new UtilisateurManager();
+                // Si l'adresse e-mail nest pas déjà utilisée par un autre utilisateur
                 if(!$UtilisateurManager->findOneByEmail($email)){
+                    // Si le pseudo n'est pas deja utilisé par un autre utilisateur
                     if(!$UtilisateurManager->findOneByUser($pseudonyme)){
+                         // Si les mots de passe saisis correspondent et sont d'une longueur d'au moins 8 caractères
                         if(($motsDePasse == $motsDePasseConfirmation) and strlen($motsDePasse) >=8){
+                            // ici jehache le mot de passe pour stockage sécurisé
                             $motsDePassHash =self::getMotsDePasseHash($motsDePasse);
+
+                            // et j'ajoute un nouvel utilisateur à la BDD avec les informations fournie
                             $UtilisateurManager->add([
                                 "pseudonyme"=>$pseudonyme,
                                 "email"=>$email,
@@ -44,6 +51,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
                                 "motsDePasse"=>$motsDePassHash,
                                 "role"=>$role
                             ]);
+                            // je le redirige a login une fois la connexion validé
                             $this->redirectTo("security", "login"); // login a faire pour la redirction
                         }
                     }

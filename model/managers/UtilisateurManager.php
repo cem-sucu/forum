@@ -48,7 +48,7 @@
             //je vérifie si le formulaire a été soumis
             if(isset($_POST["submit"])){
                 // Récupère et filtre l'email et le mot de passe
-                $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL, FILTER_VALIDATE_EMAIL);
+                $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL);
                 $motsDePasse = filter_input(INPUT_POST, 'motsDePasse', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
                 if($email && $motsDePasse){ // si c'est valide je continue
