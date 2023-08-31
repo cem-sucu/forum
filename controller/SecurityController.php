@@ -17,7 +17,7 @@ use Model\Managers\UtilisateurManager;
 class SecurityController extends AbstractController implements ControllerInterface{
     public function inscription(){
         // je creer une insatnce de la classe UtilisateurManager
-        $UtilisateurManager = new UtilisateurManager();
+        $utilisateurManager = new UtilisateurManager();
 
         //si le formulaire est valide est soumis 'submit' pour la vérification
         //voir exercice forum dans teams
@@ -28,25 +28,30 @@ class SecurityController extends AbstractController implements ControllerInterfa
             $motsDePasse = filter_input(INPUT_POST, "motsDePasse", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $motsDePasseConfirmation =filter_input(INPUT_POST, "motsDePasseConfirmation", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $role ="ROLE_MEMBER";
+
             // var_dump("$pseudonyme");die;
+            // var_dump("$email");die;
+            // var_dump("$motsDePasse");die;
+            // var_dump("$motsDePasseConfirmation");die;
+            // var_dump("$role");die;
 
             // $now = new \DateTime();
             // $nowFormat = $now->format("Y-m-d H:i:s");
 
             // je vérifie si les champs requis (pseudonyme, email, mots de passe) ont été remplis
             if($pseudonyme && $email && $motsDePasse) {
-                $UtilisateurManager = new UtilisateurManager();
+                $utilisateurManager = new UtilisateurManager();
                 // Si l'adresse e-mail nest pas déjà utilisée par un autre utilisateur
-                if(!$UtilisateurManager->findOneByEmail($email)){
+                if(!$utilisateurManager->findOneByEmail($email)){
                     // Si le pseudo n'est pas deja utilisé par un autre utilisateur
-                    if(!$UtilisateurManager->findOneByUser($pseudonyme)){
+                    if(!$utilisateurManager->findOneByUser($pseudonyme)){
                          // Si les mots de passe saisis correspondent et sont d'une longueur d'au moins 8 caractères
                         if(($motsDePasse == $motsDePasseConfirmation) and strlen($motsDePasse) >=8){
                             // ici jehache le mot de passe pour stockage sécurisé
                             $motsDePassHash =self::getMotsDePasseHash($motsDePasse);
 
                             // et j'ajoute un nouvel utilisateur à la BDD avec les informations fournie
-                            $UtilisateurManager->add([
+                            $utilisateurManager->add([
                                 "pseudonyme"=>$pseudonyme,
                                 "email"=>$email,
                                 // "dateCreation"=>$nowFormat,

@@ -36,7 +36,7 @@
             WHERE pseudonyme = :pseudonyme";
 
             return $this->getOneorNullResult(
-                DAO::select($sql, ['pseudonyme ' => $pseudonyme], false),
+                DAO::select($sql, ['pseudonyme' => $pseudonyme], false),
                 $this->className
             );
         }
