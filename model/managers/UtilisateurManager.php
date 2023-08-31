@@ -23,7 +23,7 @@
             WHERE email = :email";
 
             return $this->getOneorNullResult(
-                DAO::select($sql, ['email' => $email], false),
+                DAO::SELECT($sql, ['email' => $email], false),
                 $this->className
             );
         }
@@ -36,7 +36,8 @@
             WHERE pseudonyme = :pseudonyme";
 
             return $this->getOneorNullResult(
-                DAO::select($sql, ['pseudonyme' => $pseudonyme], false),
+                
+                DAO::SELECT($sql, ['pseudonyme' => $pseudonyme], false),
                 $this->className
             );
         }
