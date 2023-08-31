@@ -29,10 +29,10 @@ class SecurityController extends AbstractController implements ControllerInterfa
             $motsDePasseConfirmation =filter_input(INPUT_POST, "motsDePasseConfirmation", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $role ="ROLE_MEMBER";
 
-            // var_dump("$pseudonyme");die;
-            // var_dump("$email");die;
-            // var_dump("$motsDePasse");die;
-            // var_dump("$motsDePasseConfirmation");die;
+            // var_dump("$pseudonyme");
+            // var_dump("$email");
+            // var_dump("$motsDePasse");
+            // var_dump("$motsDePasseConfirmation");
             // var_dump("$role");die;
 
             // $now = new \DateTime();
@@ -60,6 +60,8 @@ class SecurityController extends AbstractController implements ControllerInterfa
                             ]);
                             // je le redirige a login une fois la connexion validé
                             $this->redirectTo("security", "login"); // login a faire pour la redirction
+                        } else {
+                            echo " <p style='background-color:red; color:white;'>Votre mots de passe est trop court, il faut minimun 8 caractèeres !</p>";
                         }
                     }
                 }
@@ -72,6 +74,41 @@ class SecurityController extends AbstractController implements ControllerInterfa
     }
     private static function getMotsDePasseHash($password){
         return password_hash($password, PASSWORD_DEFAULT);
+    }
+
+    public function connexion(){
+        //je vcrée une instance de UtilisateurManager pour gérer les opérations liées aux utilisateur
+        $utilisateurManager = new UtilisateurManager();
+
+        //je vérifie si le formulaire a été soumis
+        if(isset($_POST["submit"])){
+            // Récupère et filtre l'email et le mot de passe
+            $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL);
+            $motsDePasse = filter_input(INPUT_POST, 'motsDePasse', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            // var_dump("$email");
+            // var_dump("$$motsDePasse");die;
+
+            if($email && $motsDePasse){ // si c'est valide je continue
+                var_dump("c'est validé");
+                // je chherche un utilisateur dans la base de données par son adresse e-mail avec la methode findOneByEmail.
+                $dbUser= $utilisateurManager->findOneByEmail($email);
+                var_dump($dbUser);die;
+                if($dbUser && password_verify($motsDePasse, $dbUser->getMotsDePasse())){
+                    // Défini lutilisateur en session et en indiquant qu'il est connecté.
+                    Session::setUser($dbUser);
+                    // et je le redirige vers la liste des sujets des catégories du forum.
+                    $this->redirectTo('forum', 'listeCategorieSujets');
+                }else{
+                    // sinon je dirigie vers la page login car mauvais mots de passe
+                    $this->redirectTo('security', 'login');
+                }
+            }
+        }
+        return [
+            "view" => VIEW_DIR . "security/login.php",
+            "data" => []
+        ];
     }
 }
 
