@@ -59,7 +59,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
                                 "role"=>$role
                             ]);
                             // je le redirige a login une fois la connexion validé
-                            $this->redirectTo("security", "login"); // login a faire pour la redirction
+                            $this->redirectTo("security", "connexion"); // login a faire pour la redirction
                         } else {
                             echo " <p style='background-color:red; color:white;'>Votre mots de passe est trop court, il faut minimun 8 caractèeres !</p>";
                         }

@@ -75,7 +75,11 @@
                    
                     ]);
                     }
-                    header("Location:index.php?ctrl=forum&action=listeCategorieSujets&id=$id");
+                     //nouvelle méthode de redirection
+                    $this->redirectTo("forum", "listeCategorieSujets", $id);
+                    
+                    //ancienne methode de redirection
+                    // header("Location:index.php?ctrl=forum&action=listeCategorieSujets&id=$id");
                     exit;
                 };
             };
@@ -116,7 +120,11 @@
                         "utilisateur_id"=>$utilisateur_id,
                     ]);
                     };
-                    header("Location:index.php?ctrl=forum&action=listMessagesSujet&id=$id");
+                    //nouvelle méthode de redirection
+                    $this->redirectTo("forum", "listMessagesSujet", $id);
+
+                    //ancienne methode de redirection
+                    // header("Location:index.php?ctrl=forum&action=listMessagesSujet&id=$id");
                     exit;
                 };
             }
