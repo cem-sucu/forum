@@ -117,7 +117,47 @@ class SecurityController extends AbstractController implements ControllerInterfa
             "data" => []
         ];
     }
+
+
+    public function logout()
+{
+    // on déconnecte l'utilisateur en supprimant ses données de session avec unset
+    Session::unsetUser(); // permet de supprimer les données de l'utilisateur de la session
+
+    // et je redirige l'utilisateur vers la page de connexion
+    $this->redirectTo('security', 'login');
 }
+
+
+
+    // la methode pour affichzer la vue selon le user connecté
+    public function viewProfile(){
+
+        // on vérifie si l'utilisateur est connecté 
+        if (!Session::getUser()){
+        $this->redirectTo('security', 'login');// sinon je le redirige vers login pour qu'il se connecte
+        }
+        // je récupère les info de l'utilisateur depuis la session
+        $loggedInUser = Session::getUser();
+        // onc réez une instance du gestionnaire utilisateur
+        $userManager = new UtilisateurManager();
+        // je récup les donnés de utilisateur depuis la base de donné
+        $user = $userManager->findOneByEmail($loggedInUser->getEmail());
+
+        if (!$user) {
+            $this->redirectTo('security', 'login');
+        }
+
+        // je return la viewProfile
+        return [
+            "view" => VIEW_DIR . "security/viewProfile.php",
+            "data" => [
+                "user" => $user,
+            ],
+        ];
+    }
+}
+
 
 
 ?>

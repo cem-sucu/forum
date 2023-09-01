@@ -37,6 +37,15 @@
             return (isset($_SESSION['user'])) ? $_SESSION['user'] : false;
         }
 
+        public static function unsetUser()
+        {
+            // supprime l'utilisateur s'il est défini
+            if (isset($_SESSION['user'])) {
+                unset($_SESSION['user']);
+            }
+        }
+
+
         public static function isAdmin(){
             if(self::getUser() && self::getUser()->hasRole("ROLE_ADMIN")){
                 return true;
