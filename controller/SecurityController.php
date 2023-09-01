@@ -119,14 +119,14 @@ class SecurityController extends AbstractController implements ControllerInterfa
     }
 
 
+    //pour la déconnexion d'un compte
     public function logout()
-{
-    // on déconnecte l'utilisateur en supprimant ses données de session avec unset
-    Session::unsetUser(); // permet de supprimer les données de l'utilisateur de la session
-
-    // et je redirige l'utilisateur vers la page de connexion
-    $this->redirectTo('security', 'login');
-}
+    {
+        // on déconnecte l'utilisateur en supprimant ses données de session avec unset
+        Session::unsetUser(); // permet de supprimer les données de l'utilisateur de la session
+        // et je redirige l'utilisateur vers la page de connexion
+        $this->redirectTo('security', 'connexion');
+    }
 
 
 
