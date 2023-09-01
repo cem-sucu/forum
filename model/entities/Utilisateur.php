@@ -138,6 +138,19 @@ final class Utilisateur extends Entity{
 
         return $this;
     }
+
+    // pour permettre de vérifier si l'utilisateur à un rôle particulier. 
+    // et je compare ensuite le rôle de l'utilisateur $this->role à celui passé en argument $role
+    public function hasRole($role) {
+
+        return $this->role === $role;
+    }
+
+    // avec la toString je retourne le pseudonyme de l'utilisateur sous forme de chaîne de caractères.
+    public function __toString(){
+
+        return $this->getPseudonyme();
+    }
 } 
 
 ?>

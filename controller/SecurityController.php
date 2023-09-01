@@ -85,21 +85,27 @@ class SecurityController extends AbstractController implements ControllerInterfa
             // Récupère et filtre l'email et le mot de passe
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL);
             $motsDePasse = filter_input(INPUT_POST, 'motsDePasse', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
             // var_dump("$email");
             // var_dump("$$motsDePasse");die;
 
             if($email && $motsDePasse){ // si c'est valide je continue
                 // var_dump("le mot de passe et le email : c'est validé");
+
                 // je chherche un utilisateur dans la base de données par son adresse e-mail avec la methode findOneByEmail.
                 $dbUser= $utilisateurManager->findOneByEmail($email);
                 // var_dump($dbUser);die;
+
                 if($dbUser && password_verify($motsDePasse, $dbUser->getMotsDePasse())){
-                    var_dump("ok");die;
+                    // var_dump("mots de passe et email : ok");
+
                     // Défini lutilisateur en session et en indiquant qu'il est connecté.
                     Session::setUser($dbUser);
+                    // echo '<pre>';
+                    // var_dump($dbUser);die;
+                    // echo '</pre>';
+
                     // et je le redirige vers la liste des sujets des catégories du forum.
-                    $this->redirectTo('forum', 'listeCategorieSujets');
+                    $this->redirectTo('security', 'viewProfile');
                 }else{
                     // sinon je dirigie vers la page login car mauvais mots de passe
                     $this->redirectTo('security', 'login');
