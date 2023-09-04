@@ -5,10 +5,12 @@
     use App\Session;
     use App\AbstractController;
     use App\ControllerInterface;
+    use App\SecurityController;
     use Model\Entities\Categorie;
     use Model\Managers\SujetManager;
     use Model\Managers\MessageManager;
     use Model\Managers\CategorieManager;
+    use Model\Managers\UtilisateurManager;
     
     class ForumController extends AbstractController implements ControllerInterface{
 
@@ -50,11 +52,21 @@
 
             //pour le formulaire d'un ajout de sujet et d'un message 
             if(isset($_POST["submit"])) {
+
+                // JE vérifie si l'utilisateur est connecté et j'associe la variable $utilisateur_id à getUser() donc la personne qui est connécté
+                if (Session::getUser()) {
+                    var_dump("l'user a bien etait recup félicitation continue comme ca");die;
+                    $utilisateur_id = Session::getUser()->getId();
+                } else {
+                    // si la personne essaie d'écrire un message je le redirige vers la page d'accueil
+                    echo "vous devez être connecté pour pouvoir écrire un message";
+                    $this->redirectTo('security', 'connexion');
+                    exit;
+                }
                 // ajout de mon nouveau sujet
                 if(isset($_POST['titre']) && (!empty($_POST['titre']))){
                     $titre=filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                     $message=filter_input(INPUT_POST, "message", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-                    $utilisateur_id = 1;
 
                     $now = new \DateTime();
                     $nowFormat = $now->format("Y-m-d H:i:s");
@@ -103,10 +115,19 @@
 
             //pour le formulaire d'ajout d'un message dans un sujet
             if(isset($_POST["submit"])) {
+
+                 // Je vérifie si l'utilisateur est connecté et j'associe la variable $utilisateur_id à getUser() donc la personne qui est connécté
+                if (Session::getUser()) {
+                    $utilisateur_id = Session::getUser()->getId();
+                } else {
+                    // si la personne essaie d'écrire un message je le redirige vers la page d'accueil
+                    $this->redirectTo('security', 'connexion');
+                    exit;
+                }
+
                 // ajout de mon nouveau message
                 if(isset($_POST["message"]) && (!empty($_POST["message"]))){
                     $message=filter_input(INPUT_POST, "message", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-                    $utilisateur_id = 1;
 
                     $now= new \DateTime();
                     $nowFormat = $now->format("Y-m-d H:i:s");

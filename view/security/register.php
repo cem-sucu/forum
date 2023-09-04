@@ -9,7 +9,7 @@
     <label for="email">Ermail</label>
     <input type="email" name="email" id="email" required>
 
-    <label for="password">mot de passe</label>
+    <label for="password">mot de passe (8 caractères minimum)</label>
     <input type="password" name="motsDePasse" id="motsDePasse" required>
 
     <label>confirmation de votre mot de passe</label>

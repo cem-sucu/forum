@@ -1,1 +1,1 @@
-<p>page viewProfile</p>
+<p>Bienvenu sur votre page personel</p>
