@@ -19,7 +19,7 @@
 
         // la requete SQL pour trouver, récupérer les message par sujet par le :id
         public function messagesParSujets($id){
-            $sql = "SELECT m.texte, m.dateCreation, m.utilisateur_id
+            $sql = "SELECT m.id_message, m.texte, m.dateCreation, m.utilisateur_id
                     FROM message m
                     WHERE m.sujet_id = :id
                     ORDER BY m.dateCreation ASC;";
@@ -41,6 +41,15 @@
                 DAO::select($sql),
                 $this->classNAme
             );
+        }
+
+        // la requete sql pour supprimé
+        public function supprimermessage($id){
+            $sql = "DELETE FROM ".$this->tableName."
+                    WHERE id_".$this->tableName." = :id
+                    ";
+
+            return DAO::delete($sql, ['id' => $id]); 
         }
 
 

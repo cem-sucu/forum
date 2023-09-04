@@ -101,7 +101,7 @@
                 "data" => [ //le tableau associatif contenant les données
                     "categorie" => $categorie,
                     "sujets" => $sujets,
-                ]
+                ],
             ];
         }
 
@@ -155,10 +155,42 @@
                 "data" => [
                     "sujet" => $sujet,
                     "messages" =>$messages,
-                ]
-                ];
-        }        
+                ],
+            ];
+        }            
 
-
+        public function supprimerMessageUtilisateur($id){
+            // Vérifie si l'utilisateur est connecté
+            if (Session::getUser()) {
+                // var_dump("connecté");die;
+                // Obtient l'ID de l'utilisateur connecté
+                $utilisateur_id = Session::getUser()->getId();
+                // var_dump("le id est ".$utilisateur_id);die;
+                // Crée une instance du gestionnaire de messages
+                $messageManager = new MessageManager();
+                // var_dump($messageManager);die;
+                // je récupère le message avec l'ID fourni
+                $message = $messageManager->findOneById($id);
+                // var_dump($message);die;
+                $messageId= $message->getSujet()->getId();
+                // ici on vérifie si le message appartient à l'utilisateur connecté
+                if ($message && ($message->getUtilisateur()->getId() == $utilisateur_id)) {
+                  
+                    // var_dump("le message appartient bien au bon utilisateur");die;
+                    // je suupprime le message de la base de données
+                    $messageManager->delete($id);
+                    
         
+                    // et je redirige l'utilisateur vers une page appropriée (par exemple, la liste de ses messages)
+                    $this->redirectTo('forum', 'listMessagesSujet', $messageId);
+                } else {
+                    //messsage interdiction de supp
+                }
+            } else {
+                 // la rediretcion de utilisateur vers la page connexion
+                $this->redirectTo('security', 'connexion');
+            }
+        }
+        
+            
     }

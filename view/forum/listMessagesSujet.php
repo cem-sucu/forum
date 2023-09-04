@@ -10,11 +10,17 @@ $messages = $result['data']["messages"];
 // ici je vérifie le tableau si c'est différent de NUULL je retourne le message trouvé, sinon si c'est NULL alors je renvoie le mssage non trouvé
 if ($messages !== null) { 
     foreach($messages as $message){
+        // var_dump($message->getId());die;
         ?>
         <div class="messageContenu">
             <h3><?=$message->getUtilisateur()->getPseudonyme() ?></h3>
-            <p>message créé :<?=$message->getDateCreation() ?></p>
+            <p>message créé :<?=$message->getDateCreation()?></p>
+            <!-- <p><?=$message->getId() ?></p> -->
             <p><?=$message->getTexte() ?></p>
+            <form action="index.php?ctrl=forum&action=supprimerMessageUtilisateur&id=<?= $message->getId() ?>" method="post">
+                <input type="submit" name="submit" value="Supprimer">
+            </form>
+
         </div>
         <?php
     }
