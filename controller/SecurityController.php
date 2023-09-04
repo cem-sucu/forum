@@ -108,7 +108,9 @@ class SecurityController extends AbstractController implements ControllerInterfa
                     $this->redirectTo('security', 'viewProfile');
                 }else{
                     // sinon je dirigie vers la page login car mauvais mots de passe
-                    $this->redirectTo('security', 'login');
+                    // var_dump("mauvais mdp");die;
+                    echo " <p style='background-color:red; color:white;'>Ce profil n'existe pas !</p>";
+                    // $this->redirectTo('security', 'connexion');
                 }
             }
         }
